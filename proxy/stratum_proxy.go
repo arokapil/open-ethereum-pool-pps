@@ -114,6 +114,7 @@ func (cs *Session) handleSPMessage(s *ProxyServer, req *StratumReq) error {
 		if errReply != nil {
 			return cs.sendSPError(req.Id, errReply)
 		}
+		cs.difficulty = s.config.Proxy.BaseDifficulty
 		return cs.sendSPResult(req.Id, reply)
 	case "eth_getWork":
 		reply, errReply := s.handleGetWorkRPC(cs)
@@ -201,7 +202,7 @@ func (s *ProxyServer) broadcastNewSPJobs() {
 	if t == nil || len(t.Header) == 0 || s.isSick() {
 		return
 	}
-	reply := []string{t.Header, t.Seed, s.diff}
+	reply := []string{t.Header, t.Seed, util.GetTargetHex(int64(s.config.Proxy.BaseDifficulty))}
 
 	s.sessionsMu.RLock()
 	defer s.sessionsMu.RUnlock()

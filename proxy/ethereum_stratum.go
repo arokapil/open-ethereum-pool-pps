@@ -7,6 +7,7 @@ import (
 	"bufio"
 	"io"
 	"fmt"
+	"strconv"
 	"time"
 	"math/rand"
 
@@ -275,6 +276,22 @@ func(cs *Session) sendJob(s *ProxyServer, id *json.RawMessage) error {
 	return cs.sendESReq(resp)
 }
 
+func (cs *Session) setContext(s *ProxyServer, password string) error {
+	cs.difficulty = s.config.Proxy.BaseDifficulty
+	userDiff, _ := strconv.ParseFloat(password, 64)
+
+	if userDiff >= 0.005 {
+		cs.difficulty = 4294967296.0 * userDiff
+	}
+
+	respReq := EthStratumReq{ Method:"mining.set_difficulty", Params:[]float64{ cs.difficulty / 4294967296 } }
+	if err := cs.sendESReq(respReq); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (cs *Session) handleESMessage(s *ProxyServer, req *StratumReq) error {
 	// Handle RPC methods
 	switch req.Method {
@@ -321,11 +338,7 @@ func (cs *Session) handleESMessage(s *ProxyServer, req *StratumReq) error {
 			return err
 		}
 
-		paramsDiff := []float64{
-			float64(s.config.Proxy.Difficulty) / 4294967296,
-		}
-		respReq := EthStratumReq{Method:"mining.set_difficulty", Params:paramsDiff}
-		if err := cs.sendESReq(respReq); err != nil {
+		if err := cs.setContext(s, params[1]); err != nil {
 			return err
 		}
 

@@ -28,7 +28,8 @@ type Proxy struct {
 	Enabled              bool   `json:"enabled"`
 	Listen               string `json:"listen"`
 	BlockRefreshInterval string `json:"blockRefreshInterval"`
-	Difficulty           int64  `json:"difficulty"`
+	BaseDifficulty       float64  `json:"difficulty"`
+	AllowCustomDiff      bool   `json:"allowCustomDiff"`
 	MiningFee            float64 `json:"miningFee"`
 	PoT_A                float64 `json:"potA"`
 	PoT_Cap              float64 `json:"potCap"`

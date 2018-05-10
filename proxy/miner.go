@@ -12,9 +12,9 @@ import (
 
 var hasher = ethash.New()
 
-func (s *ProxyServer) processShare(login, id, ip string, t *BlockTemplate, data []string) (bool, bool, []string) {
+func (s *ProxyServer) processShare(login, id, ip string, difficulty float64, t *BlockTemplate, data []string) (bool, bool, []string) {
 	nonce, _ := strconv.ParseUint(strings.Replace(data[0], "0x", "", -1), 16, 64)
-	shareDiff := s.config.Proxy.Difficulty
+	shareDiff := int64(difficulty)
 	shareFee := s.config.Proxy.MiningFee
 	potA := s.config.Proxy.PoT_A
 	potCap := s.config.Proxy.PoT_Cap

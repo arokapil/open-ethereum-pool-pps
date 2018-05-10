@@ -64,8 +64,6 @@ func (s *ProxyServer) fetchBlockTemplate() {
 		return
 	}
 
-	pendingReply.Difficulty = util.ToHex(s.config.Proxy.Difficulty)
-
 	newTemplate := BlockTemplate{
 		Header:               reply[0],
 		Seed:                 reply[1],
