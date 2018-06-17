@@ -15,14 +15,14 @@ module.exports = function(environment) {
 
     APP: {
       // API host and port
-      ApiUrl: '//etherdig.net/',
+      ApiUrl: '//eur-speedpool.org/',
 
       // HTTP mining endpoint
-      HttpHost: 'http://etherdig.net',
+      HttpHost: 'http://eur-speedpool.org',
       HttpPort: 8888,
 
       // Stratum mining endpoint
-      StratumHost: 'etherdig.net',
+      StratumHost: 'eur-speedpool.org',
       StratumPort: 8008,
 
       // Fee and payout details

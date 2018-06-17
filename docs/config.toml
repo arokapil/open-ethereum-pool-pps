@@ -2,8 +2,8 @@
 no_download = true
 
 [account]
-unlock = ["96b27bc6ca335437b36f72ce1990322a81872378"]
-password = ["/home/parity/.password"]
+unlock = ["2115df53b9358d96ff6570008e1a761c9e8ffb9a"]
+password = ["/mnt/poolworkplace/poolethereumclassic/passwordether.txt"]
 
 [ui]
 disable = true
@@ -19,7 +19,7 @@ allow_ips = "all"
 
 [rpc]
 disable = false
-port = 8545
+port = 9545
 interface = "local"
 cors = "null"
 apis = ["web3", "eth", "net", "parity", "rpc"]
@@ -42,12 +42,12 @@ disable = true
 enable = false
 
 [mining]
-author = "96b27bc6ca335437b36f72ce1990322a81872378"
+author = "2115df53b9358d96ff6570008e1a761c9e8ffb9a"
 min_gas_price = 99000000000
 
 [vm]
 jit = false
 
 [misc]
-log_file = "/home/parity/parity.log"
+log_file = "/mnt/poolworkplace/parityether.log"
 color = false
